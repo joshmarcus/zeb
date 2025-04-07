@@ -75,7 +75,7 @@ def test_check_in_morning(runner, mock_data_store, mock_coach, mock_prompt_build
     
     result = runner.invoke(app, ["check-in-morning"])
     
-    assert result.exit_code == 0
+            assert result.exit_code == 0
     mock_session_logger.start_session.assert_called_once_with("morning_check_in")
     mock_context_manager.get_recent_context.assert_called_once()
     mock_prompt_builder.build_morning_prompt.assert_called_once()
@@ -93,7 +93,7 @@ def test_check_in_evening(runner, mock_data_store, mock_coach, mock_prompt_build
     
     result = runner.invoke(app, ["check-in-evening"])
     
-    assert result.exit_code == 0
+            assert result.exit_code == 0
     mock_session_logger.start_session.assert_called_once_with("evening_check_in")
     mock_context_manager.get_recent_context.assert_called_once()
     mock_prompt_builder.build_evening_prompt.assert_called_once()
@@ -109,9 +109,9 @@ def test_task_add(runner, mock_data_store, mock_coach, mock_prompt_builder, mock
     
     result = runner.invoke(app, ["task", "--action", "add"], input="Test Task\nTest Description\nhigh\n2024-03-20\ny\n")
     
-    assert result.exit_code == 0
+            assert result.exit_code == 0
     mock_session_logger.start_session.assert_called_once_with("task_add")
-    mock_coach.suggest_task_breakdown.assert_called_once()
+            mock_coach.suggest_task_breakdown.assert_called_once()
     mock_session_logger.log_interaction.assert_called_once()
     mock_session_logger.end_session.assert_called_once_with("test_session")
 
@@ -128,9 +128,9 @@ def test_task_list(runner, mock_data_store, mock_session_logger):
         )
     ]
     
-    result = runner.invoke(app, ["task", "--action", "list"])
-    
-    assert result.exit_code == 0
+            result = runner.invoke(app, ["task", "--action", "list"])
+            
+            assert result.exit_code == 0
     mock_session_logger.start_session.assert_called_once_with("task_list")
     mock_data_store.get_all.assert_called_once_with(Task)
     mock_session_logger.log_interaction.assert_called_once()
@@ -145,7 +145,7 @@ def test_journal_add(runner, mock_data_store, mock_coach, mock_prompt_builder, m
     
     result = runner.invoke(app, ["journal", "--content", "Test content", "--reflection-type", "procrastination", "--mood", "frustrated"])
     
-    assert result.exit_code == 0
+            assert result.exit_code == 0
     mock_session_logger.start_session.assert_called_once_with("journal_add")
     mock_prompt_builder.build_procrastination_prompt.assert_called_once()
     mock_coach.analyze_procrastination.assert_called_once_with("Test procrastination prompt")
@@ -159,9 +159,9 @@ def test_project_add(runner, mock_data_store, mock_session_logger):
     
     result = runner.invoke(app, ["project", "--action", "add"], input="Test Project\nTest Description\n")
     
-    assert result.exit_code == 0
+            assert result.exit_code == 0
     mock_session_logger.start_session.assert_called_once_with("project_add")
-    mock_data_store.save.assert_called_once()
+            mock_data_store.save.assert_called_once()
     mock_session_logger.log_interaction.assert_called_once()
     mock_session_logger.end_session.assert_called_once_with("test_session")
 
@@ -176,8 +176,8 @@ def test_project_list(runner, mock_data_store, mock_session_logger):
         )
     ]
     
-    result = runner.invoke(app, ["project", "--action", "list"])
-    
+            result = runner.invoke(app, ["project", "--action", "list"])
+            
     assert result.exit_code == 0
     mock_session_logger.start_session.assert_called_once_with("project_list")
     mock_data_store.get_all.assert_called_once_with(Project)
@@ -496,7 +496,7 @@ def test_feature_cli(monkeypatch):
         ["feature", "update", "--feature-id", feature_id],
         input="Updated Feature\nUpdated description\nmedium\nin_progress\nImplementation started\ntest,cli,update\n"
     )
-    assert result.exit_code == 0
+            assert result.exit_code == 0
     assert "Feature request updated successfully!" in result.stdout
     
     updated_feature = data_store.get_by_id(FeatureRequest, feature_id)

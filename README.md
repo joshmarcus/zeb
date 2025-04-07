@@ -1,6 +1,6 @@
-# Roy - Your Terminal-Based Productivity Assistant
+# Zeb - Your Terminal-Based Productivity Assistant
 
-Roy is a powerful terminal-based productivity assistant that helps you manage your daily tasks, projects, and reflections using a GTD-style workflow. It features AI-powered coaching to help you stay focused and productive.
+Zeb is a powerful terminal-based productivity assistant that helps you manage your daily tasks, projects, and reflections using a GTD-style workflow. It features AI-powered coaching to help you stay focused and productive.
 
 ## Features
 
@@ -40,7 +40,7 @@ pip install -e ".[dev]"
 
 ### OpenAI API Key
 
-Roy uses OpenAI's GPT-4 for coaching and insights. You'll need to set up your API key:
+Zeb uses OpenAI's GPT-4 for coaching and insights. You'll need to set up your API key:
 
 1. Get your API key from [OpenAI's platform](https://platform.openai.com/api-keys)
 
@@ -56,52 +56,52 @@ OPENAI_API_KEY=your-api-key-here
 
 ## Usage
 
-Once installed, you can use Roy from anywhere in your terminal by typing `roy` followed by the command:
+Once installed, you can use Zeb from anywhere in your terminal by typing `zeb` followed by the command:
 
 ### Daily Check-ins
 
 ```bash
 # Morning check-in
-roy check-in --time morning
+zeb check-in --time morning
 
 # Evening check-in
-roy check-in --time evening
+zeb check-in --time evening
 ```
 
 ### Task Management
 
 ```bash
 # Add a new task
-roy task --action add
+zeb task --action add
 
 # List all tasks
-roy task --action list
+zeb task --action list
 
 # Complete a task
-roy task --action complete --task-id <task-id>
+zeb task --action complete --task-id <task-id>
 ```
 
 ### Journaling
 
 ```bash
 # Add a journal entry
-roy journal --content "Today I..." --reflection-type reflection --mood happy
+zeb journal --content "Today I..." --reflection-type reflection --mood happy
 
 # Add a procrastination reflection
-roy journal --content "I'm procrastinating on..." --reflection-type procrastination --mood anxious
+zeb journal --content "I'm procrastinating on..." --reflection-type procrastination --mood anxious
 ```
 
 ### Project Management
 
 ```bash
 # Add a new project
-roy project --action add
+zeb project --action add
 
 # List all projects
-roy project --action list
+zeb project --action list
 
 # Add a task to a project
-roy task --action add --project-id <project-id>
+zeb task --action add --project-id <project-id>
 ```
 
 ## Development

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import io
 
 setup(
-    name="productivity-assistant",
+    name="zeb",
     version="0.1.0",
     packages=find_packages(),
     include_package_data=True,
@@ -24,15 +24,15 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "roy=src.main:app",
+            "zeb=src.main:app",
         ],
     },
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="Josh Marcus",
+    author_email="josh.marcus@gmail.com",
     description="A terminal-based productivity assistant with GTD-style workflow",
     long_description=io.open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/productivity-assistant",
+    url="https://github.com/joshmarcus/zeb",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

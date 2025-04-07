@@ -1,0 +1,11 @@
+---
+description: adding unit tests
+globs: 
+alwaysApply: false
+---
+
+# Your rule content
+
+- You can @ files here
+- You can use markdown but dont have to
+Always run tests after adding them.  Usually run tests after making significant changes.

@@ -1,0 +1,499 @@
+{
+  "8dc8d729-e907-4554-a2d9-093ca5afa677": {
+    "type": "task_add",
+    "start_time": "2025-04-07T15:49:22.417493",
+    "end_time": "2025-04-07T15:56:33.194313",
+    "interactions": []
+  },
+  "5bacaa62-cc96-4fa4-9145-bd9e660f2f3f": {
+    "type": "task_add",
+    "start_time": "2025-04-07T15:58:09.795198",
+    "end_time": "2025-04-07T15:58:09.800201",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T15:58:09.796200",
+        "type": "task_creation",
+        "task": {
+          "id": "ecdc60bf-2ac4-4deb-b3b3-676e636b0428",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T15:58:09.796200",
+          "updated_at": "2025-04-07T15:58:09.796200",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "9611c1d3-9acc-4b88-a314-cbc1cbd0ff6c": {
+    "type": "task_list",
+    "start_time": "2025-04-07T15:58:10.659128",
+    "end_time": "2025-04-07T15:58:10.665126",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T15:58:10.663128",
+        "type": "task_list",
+        "count": 1
+      }
+    ]
+  },
+  "7ac5e9fc-034e-437e-8428-7166e11200be": {
+    "type": "task_add",
+    "start_time": "2025-04-07T15:58:25.237836",
+    "end_time": "2025-04-07T15:58:25.243169",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T15:58:25.238842",
+        "type": "task_creation",
+        "task": {
+          "id": "d35559da-df57-433a-99ee-585e67d4ebb3",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T15:58:25.238842",
+          "updated_at": "2025-04-07T15:58:25.238842",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "2a62ab37-885e-465e-9f43-253e64e0f0c2": {
+    "type": "task_list",
+    "start_time": "2025-04-07T15:58:26.103423",
+    "end_time": "2025-04-07T15:58:26.112421",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T15:58:26.108422",
+        "type": "task_list",
+        "count": 2
+      }
+    ]
+  },
+  "41e3d2a1-662b-4765-9f0f-3349556ed384": {
+    "type": "task_add",
+    "start_time": "2025-04-07T15:59:32.365937",
+    "end_time": "2025-04-07T15:59:32.369937",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T15:59:32.366936",
+        "type": "task_creation",
+        "task": {
+          "id": "5c15f889-eba6-43e9-9cfb-fe3f2a86d74a",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T15:59:32.366936",
+          "updated_at": "2025-04-07T15:59:32.366936",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "bd072f11-1add-4ca6-a53e-c0e6627d62be": {
+    "type": "task_list",
+    "start_time": "2025-04-07T15:59:33.238084",
+    "end_time": "2025-04-07T15:59:33.249086",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T15:59:33.245086",
+        "type": "task_list",
+        "count": 3
+      }
+    ]
+  },
+  "4df7ad42-4ff0-4638-b43b-36bb9f70cfb8": {
+    "type": "task_add",
+    "start_time": "2025-04-07T15:59:58.189808",
+    "end_time": "2025-04-07T15:59:58.193218",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T15:59:58.190806",
+        "type": "task_creation",
+        "task": {
+          "id": "c9952b68-49bc-4ccc-ad7d-ad6995c1f2ce",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T15:59:58.190806",
+          "updated_at": "2025-04-07T15:59:58.190806",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "28446cc6-cb03-4df6-83c2-f62cfd3dd547": {
+    "type": "task_list",
+    "start_time": "2025-04-07T15:59:59.067764",
+    "end_time": "2025-04-07T15:59:59.077003",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T15:59:59.073763",
+        "type": "task_list",
+        "count": 4
+      }
+    ]
+  },
+  "2e3cb295-e618-42db-8794-3f99bf24867f": {
+    "type": "task_add",
+    "start_time": "2025-04-07T16:00:16.506124",
+    "end_time": "2025-04-07T16:00:16.511124",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T16:00:16.508125",
+        "type": "task_creation",
+        "task": {
+          "id": "edbd6abd-9cda-427b-a460-6b0cf0540b91",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T16:00:16.508125",
+          "updated_at": "2025-04-07T16:00:16.508125",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "19562a39-d33c-478d-b8b6-d286c18892e8": {
+    "type": "task_list",
+    "start_time": "2025-04-07T16:00:17.377575",
+    "end_time": "2025-04-07T16:00:17.388764",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T16:00:17.384577",
+        "type": "task_list",
+        "count": 5
+      }
+    ]
+  },
+  "8a1a2885-6d4a-4e20-abfa-c584eb9f4669": {
+    "type": "task_update",
+    "start_time": "2025-04-07T16:00:18.219234",
+    "end_time": "2025-04-07T16:00:18.222034",
+    "interactions": []
+  },
+  "12f47f4f-da02-4d6c-82bf-1366d7de53df": {
+    "type": "task_add",
+    "start_time": "2025-04-07T16:00:49.639229",
+    "end_time": "2025-04-07T16:00:49.644239",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T16:00:49.641233",
+        "type": "task_creation",
+        "task": {
+          "id": "6a8df9eb-094a-4226-ba8b-59f6ffa595c7",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T16:00:49.641233",
+          "updated_at": "2025-04-07T16:00:49.641233",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "2d32c244-c78b-4f1d-8bca-33df364c0a77": {
+    "type": "task_add",
+    "start_time": "2025-04-07T16:01:17.112044",
+    "end_time": "2025-04-07T16:01:17.117043",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T16:01:17.113043",
+        "type": "task_creation",
+        "task": {
+          "id": "d143a6ec-4419-42fd-8e74-5d58c6cc219d",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T16:01:17.113043",
+          "updated_at": "2025-04-07T16:01:17.113043",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "8c00bd45-0a1f-4003-ac98-522b2c1c4797": {
+    "type": "task_add",
+    "start_time": "2025-04-07T16:02:07.871968",
+    "end_time": "2025-04-07T16:02:07.876972",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T16:02:07.872972",
+        "type": "task_creation",
+        "task": {
+          "id": "2ecc51c7-417c-4b4d-a8ba-1f43b772b6af",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T16:02:07.872972",
+          "updated_at": "2025-04-07T16:02:07.872972",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "03f42752-598c-4a20-89c2-f72a33608f6d": {
+    "type": "task_add",
+    "start_time": "2025-04-07T16:02:55.891815",
+    "end_time": "2025-04-07T16:02:55.895895",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T16:02:55.892814",
+        "type": "task_creation",
+        "task": {
+          "id": "3f7d39a0-739a-4141-9523-45185d6472b2",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T16:02:55.892814",
+          "updated_at": "2025-04-07T16:02:55.892814",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "28bf0b45-6277-45c6-8594-4c648b7c867a": {
+    "type": "task_add",
+    "start_time": "2025-04-07T16:04:03.705055",
+    "end_time": "2025-04-07T16:04:03.710055",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T16:04:03.706056",
+        "type": "task_creation",
+        "task": {
+          "id": "c0146d41-6465-4861-9775-1918ba2f2b54",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T16:04:03.706056",
+          "updated_at": "2025-04-07T16:04:03.706056",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "a5a571d0-ebb6-489c-8e24-113bdc50d304": {
+    "type": "task_add",
+    "start_time": "2025-04-07T16:04:43.013451",
+    "end_time": "2025-04-07T16:04:43.018664",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T16:04:43.015449",
+        "type": "task_creation",
+        "task": {
+          "id": "5abe9d33-abf4-48a2-84d2-0020f22ec567",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T16:04:43.014450",
+          "updated_at": "2025-04-07T16:04:43.014450",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "57b7fb1f-da7b-464c-b8e9-d7d29bf3efb2": {
+    "type": "task_add",
+    "start_time": "2025-04-07T16:05:11.435670",
+    "end_time": "2025-04-07T16:05:11.446297",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T16:05:11.436289",
+        "type": "task_creation",
+        "task": {
+          "id": "581c0320-16f4-43a9-ad5b-33ec1f5ead2d",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T16:05:11.436289",
+          "updated_at": "2025-04-07T16:05:11.436289",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "45e00f35-34d5-4405-be88-df48e102dffd": {
+    "type": "task_add",
+    "start_time": "2025-04-07T16:05:54.308907",
+    "end_time": "2025-04-07T16:05:54.319908",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T16:05:54.310907",
+        "type": "task_creation",
+        "task": {
+          "id": "4acba5d2-5021-4443-a04e-312c9fc38602",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T16:05:54.310907",
+          "updated_at": "2025-04-07T16:05:54.310907",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "c87e72e7-5489-4b4a-8f03-b8cc4aceaebc": {
+    "type": "task_add",
+    "start_time": "2025-04-07T16:06:33.734705",
+    "end_time": "2025-04-07T16:06:33.740201",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T16:06:33.736703",
+        "type": "task_creation",
+        "task": {
+          "id": "82e7d424-f880-44bb-92e7-86292c6b59b7",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T16:06:33.736703",
+          "updated_at": "2025-04-07T16:06:33.736703",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "141dc142-1437-4235-8916-8e5f4e7f6960": {
+    "type": "task_add",
+    "start_time": "2025-04-07T16:07:12.504735",
+    "end_time": "2025-04-07T16:07:12.510734",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T16:07:12.505734",
+        "type": "task_creation",
+        "task": {
+          "id": "9509c743-9194-40d2-aa62-0a985bba281f",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T16:07:12.505734",
+          "updated_at": "2025-04-07T16:07:12.505734",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "5750f7e6-3a7e-4607-9d91-6dbe75bd4888": {
+    "type": "task_add",
+    "start_time": "2025-04-07T16:08:26.566168",
+    "end_time": "2025-04-07T16:08:26.572168",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T16:08:26.568169",
+        "type": "task_creation",
+        "task": {
+          "id": "d0dd26d8-27d1-4787-9d2f-080bed35d0b7",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T16:08:26.568169",
+          "updated_at": "2025-04-07T16:08:26.568169",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  },
+  "ce4811ea-7683-49f9-9470-9a1dc330cf83": {
+    "type": "task_add",
+    "start_time": "2025-04-07T16:09:52.901935",
+    "end_time": "2025-04-07T16:09:52.907934",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T16:09:52.903935",
+        "type": "task_creation",
+        "task": {
+          "id": "35a3c82b-6b1d-46be-ba61-aea410898d91",
+          "title": "Test Task",
+          "description": "A test task",
+          "status": "pending",
+          "priority": "high",
+          "due_date": "2024-12-31T00:00:00",
+          "created_at": "2025-04-07T16:09:52.903935",
+          "updated_at": "2025-04-07T16:09:52.903935",
+          "subtasks": [],
+          "project_id": null,
+          "tags": [],
+          "notes": []
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "user": {
+    "goals": [],
+    "preferences": {},
+    "patterns": {}
+  },
+  "assistant": {
+    "memory": [],
+    "adaptations": {}
+  }
+}

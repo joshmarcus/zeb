@@ -117,4 +117,7 @@ dmypy.json
 .idea/
 
 # Data files
-data/*.json 
+data/*.json
+data/logs/*.json
+data/context/*.json
+data/prompts/*.json 

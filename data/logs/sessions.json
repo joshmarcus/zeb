@@ -495,5 +495,48 @@
         }
       }
     ]
+  },
+  "aca2bcdf-aa73-4918-b6bc-c84373b67e9b": {
+    "type": "morning_check_in",
+    "start_time": "2025-04-07T17:22:00.864678",
+    "end_time": "2025-04-07T17:22:02.253631",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T17:22:02.251631",
+        "type": "coaching",
+        "response": "Morning Coaching:\n1. Review yesterday's priorities and tasks completed to track progress.\n2. Set clear, achievable goals for today's test tasks.\n3. Identify potential challenges like procrastination triggers and plan to address them.\n4. Break down test tasks into smaller, manageable steps to maintain focus and progress steadily throughout the day. Stay disciplined in tackling each step."
+      }
+    ]
+  },
+  "1353e4a4-fc10-4735-8b92-9cda180b2c26": {
+    "type": "evening_check_in",
+    "start_time": "2025-04-07T17:22:11.558240",
+    "end_time": "2025-04-07T17:22:13.119566",
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T17:22:13.117094",
+        "type": "coaching",
+        "response": "Evening Reflection:\n1. Celebrate: Celebrate any progress you made today, no matter how small.\n2. Improve: Recognize patterns of procrastination and consider breaking tasks into smaller steps.\n3. Adjust: Plan specific actions for tomorrow to tackle your pending test tasks effectively.\n4. Encourage: Remember, progress is progress, and tomorrow is a new day to work towards your goals. Keep going!"
+      }
+    ]
+  },
+  "c67dfdae-61e2-49c5-87f6-f44ee3234f69": {
+    "type": "interactive_chat",
+    "start_time": "2025-04-07T17:26:19.785432",
+    "end_time": null,
+    "interactions": [
+      {
+        "timestamp": "2025-04-07T17:27:46.703300",
+        "type": "chat",
+        "user_input": "Hey there!  I'm going to cut and paste some tasks from a google doc, ok?",
+        "response": "Of course, feel free to paste your tasks here. Let's take a look at them together and see how we can organize and prioritize them effectively. Once you've pasted the tasks, we can start breaking them down into manageable steps and create a plan to tackle them efficiently. Just let me know when you're ready!"
+      }
+    ]
+  },
+  "e769fc49-0039-420e-822a-8d6af957416b": {
+    "type": "system_reflection",
+    "start_time": "2025-04-07T17:34:45.369811",
+    "end_time": "2025-04-07T17:35:06.313068",
+    "interactions": []
   }
 }

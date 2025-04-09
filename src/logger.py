@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 import uuid
@@ -70,4 +70,32 @@ class SessionLogger:
             self.sessions.values(),
             key=lambda x: x["start_time"],
             reverse=True
-        )[:limit] 
+        )[:limit]
+
+    def get_conversation_history(self, days: int = 30, session_types: Optional[List[str]] = None) -> List[Dict]:
+        """Get conversation history with full message content.
+        
+        Args:
+            days: Number of days of history to include
+            session_types: Optional filter for specific session types
+            
+        Returns:
+            List of conversation sessions with full text
+        """
+        start_date = datetime.now() - timedelta(days=days)
+        
+        # Filter sessions by date and type
+        filtered_sessions = []
+        for session_id, session in self.sessions.items():
+            if datetime.fromisoformat(session["start_time"]) >= start_date:
+                if session_types is None or session["type"] in session_types:
+                    # Add the session_id to the session data
+                    session_data = {**session, "id": session_id}
+                    filtered_sessions.append(session_data)
+        
+        # Sort sessions by start time (newest first)
+        return sorted(
+            filtered_sessions,
+            key=lambda x: x["start_time"],
+            reverse=True
+        ) 

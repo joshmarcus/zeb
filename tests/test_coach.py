@@ -68,7 +68,7 @@ def test_get_morning_coaching(coach):
     # Check that the OpenAI API was called correctly
     coach.client.chat.completions.create.assert_called_once()
     call_args = coach.client.chat.completions.create.call_args[1]
-    assert call_args["model"] == "gpt-4-turbo-preview"
+    assert call_args["model"] == "gpt-3.5-turbo"
     assert len(call_args["messages"]) == 2
     assert call_args["messages"][0]["role"] == "system"
     assert call_args["messages"][1]["role"] == "user"
@@ -94,7 +94,7 @@ def test_get_evening_coaching(coach):
     # Check that the OpenAI API was called correctly
     coach.client.chat.completions.create.assert_called_once()
     call_args = coach.client.chat.completions.create.call_args[1]
-    assert call_args["model"] == "gpt-4-turbo-preview"
+    assert call_args["model"] == "gpt-3.5-turbo"
     assert len(call_args["messages"]) == 2
     assert call_args["messages"][0]["role"] == "system"
     assert call_args["messages"][1]["role"] == "user"
@@ -124,7 +124,7 @@ def test_analyze_procrastination(coach):
     # Check that the OpenAI API was called correctly
     coach.client.chat.completions.create.assert_called_once()
     call_args = coach.client.chat.completions.create.call_args[1]
-    assert call_args["model"] == "gpt-4-turbo-preview"
+    assert call_args["model"] == "gpt-3.5-turbo"
     assert len(call_args["messages"]) == 2
     assert call_args["messages"][0]["role"] == "system"
     assert call_args["messages"][1]["role"] == "user"
@@ -155,7 +155,7 @@ def test_suggest_task_breakdown(coach):
     # Check that the OpenAI API was called correctly
     coach.client.chat.completions.create.assert_called_once()
     call_args = coach.client.chat.completions.create.call_args[1]
-    assert call_args["model"] == "gpt-4-turbo-preview"
+    assert call_args["model"] == "gpt-3.5-turbo"
     assert len(call_args["messages"]) == 2
     assert call_args["messages"][0]["role"] == "system"
     assert call_args["messages"][1]["role"] == "user"
@@ -186,7 +186,7 @@ def test_update_system_prompt(coach):
     # Check that the OpenAI API was called correctly
     coach.client.chat.completions.create.assert_called_once()
     call_args = coach.client.chat.completions.create.call_args[1]
-    assert call_args["model"] == "gpt-4-turbo-preview"
+    assert call_args["model"] == "gpt-3.5-turbo"
     assert len(call_args["messages"]) == 2
     assert call_args["messages"][0]["role"] == "system"
     assert call_args["messages"][0]["content"] == "You are a prompt engineering expert."

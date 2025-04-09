@@ -66,11 +66,59 @@ class ContextManager:
         self.context["assistant"]["adaptations"].update(adaptations)
         self._save_context()
 
+    def track_conversation_topic(self, topic: str, importance: int = 1) -> None:
+        """Track a conversation topic to understand user interests.
+        
+        Args:
+            topic: The topic being discussed
+            importance: Importance level (1-10)
+        """
+        if "conversation_topics" not in self.context["user"]:
+            self.context["user"]["conversation_topics"] = {}
+            
+        if topic in self.context["user"]["conversation_topics"]:
+            self.context["user"]["conversation_topics"][topic] += importance
+        else:
+            self.context["user"]["conversation_topics"][topic] = importance
+            
+        # Ensure we only keep the top 20 topics
+        sorted_topics = sorted(
+            self.context["user"]["conversation_topics"].items(),
+            key=lambda x: x[1],
+            reverse=True
+        )[:20]
+        
+        self.context["user"]["conversation_topics"] = dict(sorted_topics)
+        self._save_context()
+        
+    def store_emotional_state(self, emotion: str, intensity: int = 5, trigger: Optional[str] = None) -> None:
+        """Store information about the user's emotional state.
+        
+        Args:
+            emotion: The detected emotion (e.g., 'anxious', 'motivated')
+            intensity: Intensity level (1-10)
+            trigger: Optional trigger for the emotion
+        """
+        if "emotional_states" not in self.context["user"]:
+            self.context["user"]["emotional_states"] = []
+            
+        self.context["user"]["emotional_states"].append({
+            "timestamp": datetime.now().isoformat(),
+            "emotion": emotion,
+            "intensity": intensity,
+            "trigger": trigger
+        })
+        
+        # Keep only the 50 most recent emotional states
+        self.context["user"]["emotional_states"] = self.context["user"]["emotional_states"][-50:]
+        self._save_context()
+        
     def get_recent_context(self, days: int = 7) -> Dict:
         """Get recent context for the assistant."""
         now = datetime.now()
         start_date = now - timedelta(days=days)
         
+        # Get basic context items
         context = {
             "tasks": self._get_recent_tasks(start_date),
             "journal_entries": self._get_recent_journal_entries(start_date),
@@ -79,6 +127,26 @@ class ContextManager:
             "user_patterns": self.context["user"]["patterns"],
             "assistant_memory": self._get_relevant_memory(start_date)
         }
+        
+        # Add conversation topics if available
+        if "conversation_topics" in self.context["user"]:
+            context["conversation_topics"] = self.context["user"]["conversation_topics"]
+            
+        # Add emotional states if available
+        if "emotional_states" in self.context["user"]:
+            # Only include emotional states from within the time period
+            recent_emotions = [
+                e for e in self.context["user"]["emotional_states"]
+                if datetime.fromisoformat(e["timestamp"]) >= start_date
+            ]
+            
+            if recent_emotions:
+                context["emotional_states"] = recent_emotions
+                
+                # Calculate current emotional trend
+                if len(recent_emotions) >= 3:
+                    emotions = [e["emotion"] for e in recent_emotions[-3:]]
+                    context["emotional_trend"] = ", ".join(emotions)
         
         return context
 

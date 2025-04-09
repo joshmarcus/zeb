@@ -66,7 +66,8 @@ def test_session_logger_save_sessions(session_logger, temp_dir):
 def test_prompt_builder_initialization(prompt_builder, temp_dir):
     assert prompt_builder.prompt_dir == temp_dir
     assert prompt_builder.prompt_versions_file == temp_dir / "versions.json"
-    assert "system" in prompt_builder.prompt_versions
+    assert 1 in prompt_builder.prompt_versions
+    assert "prompt" in prompt_builder.prompt_versions[1]
 
 def test_prompt_builder_build_morning_prompt(prompt_builder, mock_data_store):
     mock_data_store.get_checkins_by_date.return_value = [
@@ -165,10 +166,23 @@ def test_prompt_builder_build_task_breakdown_prompt(prompt_builder):
     assert "high" in prompt
 
 def test_prompt_builder_update_system_prompt(prompt_builder, temp_dir):
-    feedback = "test feedback"
-    new_prompt = prompt_builder.update_system_prompt(feedback)
-    assert new_prompt == prompt_builder.get_current_system_prompt()
-    assert prompt_builder.prompt_versions["system"]["current"] == "1.1"
+    changes = {
+        "morning_prompt": {
+            "current_score": 0.7,
+            "issues": ["clarity"],
+            "suggested_changes": {
+                "clarity": {
+                    "add": ["Be more specific with task recommendations."],
+                    "remove": []
+                }
+            }
+        }
+    }
+    prompt_builder.update_system_prompt(changes)
+    # Make sure the prompt versions have been updated
+    assert len(prompt_builder.prompt_versions) > 1
+    latest_version = max(prompt_builder.prompt_versions.keys())
+    assert "changes" in prompt_builder.prompt_versions[latest_version]
 
 # Context Manager Tests
 def test_context_manager_initialization(context_manager, temp_dir):

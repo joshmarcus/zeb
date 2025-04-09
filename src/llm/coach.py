@@ -19,7 +19,7 @@ class ProductivityCoach:
         self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         self.data_store = data_store
         self.system_prompt = self._load_system_prompt()
-        self.context_manager = None  # Assuming a context manager is set up
+        self.context_manager = None  # Will be set in main.py
         self.coaching_style = {
             "tone": "assertive",  # assertive, supportive, strict
             "detail_level": "balanced",  # minimal, balanced, detailed
@@ -72,10 +72,11 @@ Be concise, practical, and empathetic in your responses."""
         
         return "\n".join(context)
 
-    def get_morning_coaching(self) -> str:
+    def get_morning_coaching(self, prompt: str = None) -> str:
         """Generate morning coaching insights and suggestions."""
-        context = self._get_context()
-        prompt = f"""Based on the following context, provide morning coaching to help set up for a productive day:
+        if prompt is None:
+            context = self._get_context()
+            prompt = f"""Based on the following context, provide morning coaching to help set up for a productive day:
 
 {context}
 
@@ -99,10 +100,11 @@ Keep the response concise and actionable."""
         
         return response.choices[0].message.content
 
-    def get_evening_coaching(self) -> str:
+    def get_evening_coaching(self, prompt: str = None) -> str:
         """Generate evening coaching insights and reflections."""
-        context = self._get_context()
-        prompt = f"""Based on the following context, provide evening coaching to reflect on the day:
+        if prompt is None:
+            context = self._get_context()
+            prompt = f"""Based on the following context, provide evening coaching to reflect on the day:
 
 {context}
 
@@ -614,4 +616,296 @@ Provide an updated version of the system prompt that addresses the feedback whil
             "coaching_style": self.coaching_style,
             "last_reflection": self.last_reflection,
             "adaptation_history": self.adaptation_history[-5:]  # Last 5 adaptations
-        } 
+        }
+
+    def generate_chat_response(self, user_input, context=None, chat_history=None) -> str:
+        """Generate a response to the user's input in a chat conversation.
+        
+        Args:
+            user_input: The user's latest message or a system prompt describing the desired response.
+            context: Optional recent context about the user's tasks, entries, etc.
+            chat_history: Optional list of previous messages in the conversation.
+            
+        Returns:
+            A response from the coach.
+        """
+        if context is None:
+            context = self._get_context()
+            
+        if chat_history is None:
+            chat_history = []
+            
+        # Create the chat prompt
+        system_content = f"""{self.system_prompt}
+
+You are engaging in a chat conversation with the user. Be conversational, friendly, and proactive.
+Ask clarifying questions when needed, and provide actionable advice.
+
+Here's recent context about the user's tasks, journal entries, and activities:
+{context}
+
+Remember to:
+1. Be empathetic and supportive, especially with emotional challenges
+2. Keep responses concise (2-3 paragraphs max)
+3. Ask probing questions to understand deeper issues
+4. Suggest concrete next steps or actions when appropriate
+5. Follow up on previously discussed topics
+"""
+
+        # Create messages from chat history
+        messages = [{"role": "system", "content": system_content}]
+        for msg in chat_history[-10:]:  # Include up to 10 most recent messages
+            messages.append({"role": msg["role"], "content": msg["content"]})
+            
+        # If user_input is not in the chat history (system directive), add it
+        if not chat_history or chat_history[-1]["role"] != "user" or chat_history[-1]["content"] != user_input:
+            if not user_input.startswith("The user"):  # Avoid adding system directives as user messages
+                messages.append({"role": "user", "content": user_input})
+            else:
+                # This is a system directive, add as a system message
+                messages.append({"role": "system", "content": user_input})
+                
+        # Generate response
+        try:
+            response = self.client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=messages,
+                temperature=0.7,
+                max_tokens=500
+            )
+            
+            return response.choices[0].message.content
+        except Exception as e:
+            print(f"Error generating chat response: {e}")
+            return "I'm having trouble processing that right now. Could you try rephrasing or ask something else?"
+            
+    def extract_task_details(self, task_description, context=None) -> dict:
+        """Extract structured task details from a natural language description.
+        
+        Args:
+            task_description: The user's description of the task.
+            context: Optional recent context about the user's tasks, entries, etc.
+            
+        Returns:
+            A dictionary with task details (title, description, priority, due_date).
+        """
+        if context is None:
+            context = self._get_context(days=7)
+            
+        prompt = f"""Extract structured task details from this description:
+
+Task Description: {task_description}
+
+Based on this context of the user's existing tasks and priorities:
+{context}
+
+Extract the following information in JSON format:
+{{
+  "title": "A clear, concise title (max 50 chars)",
+  "description": "Detailed description of what needs to be done",
+  "priority": "low|medium|high|urgent",
+  "due_date": "YYYY-MM-DD (if mentioned, otherwise null)"
+}}
+
+If any information is missing, make a reasonable inference based on context. For title, provide a concise summary of the task."""
+
+        try:
+            response = self.client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": self.system_prompt},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.3,
+                max_tokens=500
+            )
+            
+            response_text = response.choices[0].message.content
+            
+            # Extract JSON from response
+            try:
+                import json
+                import re
+                
+                # Try to find JSON in the response
+                json_match = re.search(r'({.*?})', response_text.replace('\n', ' '), re.DOTALL)
+                if json_match:
+                    task_details = json.loads(json_match.group(1))
+                    return task_details
+                else:
+                    # Parse the response manually
+                    task_details = {}
+                    if "title" in response_text:
+                        title_match = re.search(r'"title":\s*"([^"]+)"', response_text)
+                        if title_match:
+                            task_details["title"] = title_match.group(1)
+                    
+                    if "description" in response_text:
+                        desc_match = re.search(r'"description":\s*"([^"]+)"', response_text)
+                        if desc_match:
+                            task_details["description"] = desc_match.group(1)
+                    
+                    if "priority" in response_text:
+                        priority_match = re.search(r'"priority":\s*"([^"]+)"', response_text)
+                        if priority_match:
+                            task_details["priority"] = priority_match.group(1)
+                    
+                    if "due_date" in response_text:
+                        date_match = re.search(r'"due_date":\s*"([^"]+)"', response_text)
+                        if date_match and date_match.group(1).lower() != "null":
+                            task_details["due_date"] = date_match.group(1)
+                    
+                    return task_details
+            except Exception as e:
+                print(f"Error parsing task details: {e}")
+                
+            # Fallback
+            return {
+                "title": task_description[:50],
+                "description": task_description,
+                "priority": "medium",
+                "due_date": None
+            }
+        except Exception as e:
+            print(f"Error extracting task details: {e}")
+            return {
+                "title": task_description[:50],
+                "description": task_description,
+                "priority": "medium",
+                "due_date": None
+            }
+
+    def reflect_on_system(self, days: int = 30) -> dict:
+        """Analyze past conversations and system usage to suggest improvements.
+        
+        This reflection function examines:
+        1. Past conversations (chat, coaching sessions)
+        2. Tasks, journal entries, and check-ins
+        3. User behavior patterns and emotional trends
+        
+        It provides insights from both productivity methodology (GTD) and 
+        cognitive behavioral therapy perspectives.
+        
+        Args:
+            days: Number of days of history to include in the reflection
+            
+        Returns:
+            A dictionary with reflection results
+        """
+        # Get session history from logger
+        from ..logger import SessionLogger
+        session_logger = SessionLogger()
+        recent_sessions = session_logger.get_recent_sessions(50)  # Get up to 50 recent sessions
+        
+        # Filter sessions to the specified timeframe
+        start_date = datetime.now() - timedelta(days=days)
+        recent_sessions = [
+            s for s in recent_sessions 
+            if datetime.fromisoformat(s["start_time"]) >= start_date
+        ]
+        
+        # Get all recent data from context
+        context = self.context_manager.get_recent_context(days=days)
+        
+        # Extract conversation data from chat sessions
+        conversations = []
+        for session in recent_sessions:
+            if session["type"] == "interactive_chat":
+                chat_content = []
+                for interaction in session["interactions"]:
+                    if interaction.get("type") == "chat":
+                        chat_content.append({
+                            "user_input": interaction.get("user_input", ""),
+                            "response": interaction.get("response", ""),
+                            "timestamp": interaction.get("timestamp", "")
+                        })
+                if chat_content:
+                    conversations.append({
+                        "session_id": session.get("id", ""),
+                        "date": session.get("start_time", ""),
+                        "content": chat_content
+                    })
+        
+        # Extract coaching sessions
+        coaching_sessions = []
+        for session in recent_sessions:
+            if session["type"] in ["morning_check_in", "evening_check_in"]:
+                for interaction in session["interactions"]:
+                    if interaction.get("type") == "coaching":
+                        coaching_sessions.append({
+                            "session_type": session["type"],
+                            "date": session.get("start_time", ""),
+                            "response": interaction.get("response", "")
+                        })
+        
+        # Create a comprehensive prompt for the reflection
+        prompt = f"""You are an expert system evaluator with deep knowledge of both productivity methodologies (especially GTD - Getting Things Done) and cognitive behavioral therapy (CBT).
+
+Review the following data about a productivity assistant system and its interactions with a user over the past {days} days:
+
+1. CONVERSATION HISTORY:
+{json.dumps(conversations[:10], indent=2)}  # Limit to 10 conversations to avoid token limits
+
+2. COACHING SESSIONS:
+{json.dumps(coaching_sessions[:5], indent=2)}  # Limit to 5 coaching sessions
+
+3. USER DATA:
+- Tasks: {len(context.get('tasks', []))} tasks, {sum(1 for t in context.get('tasks', []) if t.get('status') == 'done')} completed
+- Journal Entries: {len(context.get('journal_entries', []))} entries
+- Check-ins: {len(context.get('check_ins', []))} check-ins
+- User Goals: {json.dumps(context.get('user_goals', []))}
+- Emotional States: {len(context.get('emotional_states', []))} recorded states
+- Conversation Topics: {json.dumps(list(context.get('conversation_topics', {}).keys()))}
+
+4. SYSTEM CONTEXT:
+- Current System Prompt: {self.system_prompt}
+
+Based on this data, provide a comprehensive reflection on:
+
+1. MISSING INFORMATION: What key data or context is missing that would help the system better serve the user?
+
+2. GTD METHODOLOGY ALIGNMENT: How well does the system align with GTD principles? What specific GTD aspects should be enhanced?
+
+3. CBT EFFECTIVENESS: How effectively is the system applying CBT principles to help the user overcome productivity challenges?
+
+4. PROMPT IMPROVEMENTS: Suggest specific improvements to the system prompts to make coaching more effective.
+
+5. FEATURE RECOMMENDATIONS: What new features would significantly enhance the system's value?
+
+6. USER ENGAGEMENT PATTERNS: What patterns emerge in how the user engages with the system? How can these be leveraged?
+
+7. EMOTIONAL SUPPORT: How effectively is the system providing emotional support? How can this be improved?
+
+Structure your response as a JSON object with these sections as keys.
+"""
+
+        try:
+            response = self.client.chat.completions.create(
+                model="gpt-4",  # Use GPT-4 for this complex analysis
+                messages=[
+                    {"role": "system", "content": "You are an expert system evaluator analyzing a productivity assistant."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.3,
+                max_tokens=2000
+            )
+            
+            response_text = response.choices[0].message.content
+            
+            # Extract JSON from response
+            try:
+                result = json.loads(response_text)
+                return result
+            except json.JSONDecodeError:
+                # If JSON parsing fails, return the raw text
+                return {
+                    "raw_reflection": response_text,
+                    "error": "Failed to parse JSON response"
+                }
+                
+        except Exception as e:
+            print(f"Error in system reflection: {e}")
+            return {
+                "error": str(e),
+                "message": "Failed to generate system reflection"
+            } 
